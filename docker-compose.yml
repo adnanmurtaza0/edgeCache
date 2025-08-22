@@ -1,2 +1,62 @@
-version: '3.9'
-services: {}
+version: "3.9"
+
+services:
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  edge1:
+    build: ./edge
+    container_name: edge1
+    environment:
+      - NODE_ID=edge1
+      - BASE_LATENCY_MS=10
+      - REDIS_ADDR=redis:6379
+      - CACHE_TTL_SECONDS=60
+    volumes:
+      - ./assets:/app/assets:ro
+    ports:
+      - "8081:8080"
+    depends_on: [redis]
+
+  edge2:
+    build: ./edge
+    container_name: edge2
+    environment:
+      - NODE_ID=edge2
+      - BASE_LATENCY_MS=35
+      - REDIS_ADDR=redis:6379
+      - CACHE_TTL_SECONDS=60
+    volumes:
+      - ./assets:/app/assets:ro
+    ports:
+      - "8082:8080"
+    depends_on: [redis]
+
+  edge3:
+    build: ./edge
+    container_name: edge3
+    environment:
+      - NODE_ID=edge3
+      - BASE_LATENCY_MS=55
+      - REDIS_ADDR=redis:6379
+      - CACHE_TTL_SECONDS=60
+    volumes:
+      - ./assets:/app/assets:ro
+    ports:
+      - "8083:8080"
+    depends_on: [redis]
+
+  client-router:
+    build: ./client-router
+    container_name: client-router
+    environment:
+      # Comma-separated list of edge base URLs (service names on compose network)
+      - EDGES=http://edge1:8080,http://edge2:8080,http://edge3:8080
+      - ROUTER_PORT=3000
+      - ENABLE_CORS=true
+    ports:
+      - "3000:3000"
+    depends_on: [edge1, edge2, edge3]
