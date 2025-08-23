@@ -1,3 +1,8 @@
-module github.com/username/edge
+module edge
 
-go 1.20
+go 1.22
+
+require (
+    github.com/go-chi/chi/v5 v5.0.12
+    github.com/redis/go-redis/v9 v9.5.1
+)
