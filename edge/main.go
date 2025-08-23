@@ -3,8 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"fmt"
-	"io/fs"
+	// "io/fs"
 	"log"
 	"math/rand"
 	"net/http"
@@ -214,7 +213,7 @@ func mustAtoi(s string) int {
 	return i
 }
 
-// ensure assets dir exists (optional)
-func ensureDir(d string) error {
-	return fs.ValidPath(d)
-}
+// // ensure assets dir exists (optional)
+// func ensureDir(d string) error {
+// 	return fs.ValidPath(d)
+// }
