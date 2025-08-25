@@ -33,13 +33,13 @@ It's not really meant to be production-ready, but its rather an educational and 
 ### Go for Edge Nodes
 Go is fast and has a simple built-in HTTP server. It’s lighter and easier to deploy than something like Java or Node for backend servers, which makes it a better fit for small, containerized edge nodes.
 
-## TypeScript + Express for Client Router
+### TypeScript + Express for Client Router
 Express is simpler to set up than heavier frameworks like NestJS. This makes it the easiest way to write a clear, minimal client router.
 
-## Redis Streams for Invalidation
+### Redis Streams for Invalidation
 Redis Streams are lightweight and real-time. They’re much easier to use than setting up Kafka or RabbitMQ, while still showing distributed pub/sub concepts. It's ideal for a lightweight demo that needs cache synchronization.
 
-## Docker + Docker Compose for Orchestration
+### Docker + Docker Compose for Orchestration
 Docker makes each component self-contained, and Compose is easier to run locally than Kubernetes. Together they let you run up the whole system with one command, without the overhead of cloud deployment tools.
 
 
