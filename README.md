@@ -46,4 +46,4 @@ Docker makes each component self-contained, and Compose is easier to run locally
 ## TODOS:
 - show hit and misses on demo
 - make the simple cache into an LRU
-- Replace simulated latency with real RTT
+- Replace simulated latencies with real RTT
